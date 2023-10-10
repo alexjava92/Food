@@ -29,7 +29,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({orderItems, onItemRemove}) =
     const handleSubmit = () => {
         dispatch(submitOrder());
     };
-    // Используйте useState для хранения суммы цен
+    // Используйте useState для хранения суммы цены
     const [priceList, setPriceList] = useState(0);
 
     // Вычислите сумму цен при загрузке компонента
