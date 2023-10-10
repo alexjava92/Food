@@ -78,7 +78,7 @@ export const addMenuItem = (name: string, price: number): AppActionTypes => ({
 })
 export const updateMenuItem = (item: MenuItem): UpdateMenuItemAction => {
     return {
-        type: 'UPDATE_MENU_ITEM',
+        type: UPDATE_MENU_ITEM,
         payload: item
     }
 }
