@@ -53,7 +53,7 @@ const OrdersList: React.FC<OrdersListProps> = ({
                             disabled={order.isDone}
                             size="small"
                         >
-                            Заказ готов
+                            Готов
                         </Button>
                         <Button
                             variant="contained"
@@ -62,15 +62,16 @@ const OrdersList: React.FC<OrdersListProps> = ({
                             size="small"
                             style={{ display: order.isDone ? 'none' : 'block' }}
                         >
-                            Удалить заказ
+                            Удалить
                         </Button>
                         <Button
                             variant="contained"
                             color="info"
                             onClick={() => onMarkAsDelivered(order.id)}
                             size="small"
+                            style={{ display: order.isDone ? 'block' : 'none' }}
                         >
-                            Заказ выдан
+                            Выдать
                         </Button>
                     </CardActions>
                 </Card>

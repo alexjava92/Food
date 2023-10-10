@@ -7,6 +7,7 @@ import {OrderItemList} from "../components/OrdersList";
 export const ADD_ITEM = 'ADD_ITEM';
 export const ADD_MENU_ITEM = 'ADD_MENU_ITEM';
 export const UPDATE_MENU_ITEM = 'UPDATE_MENU_ITEM';
+export const DELETE_MENU_ITEM = 'DELETE_MENU_ITEM';
 export const SUBMIT_ORDER = 'SUBMIT_ORDER';
 export const MARK_ORDER_AS_DONE = 'MARK_ORDER_AS_DONE';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
@@ -27,8 +28,12 @@ export interface AddMenuItemAction {
     }
 }
 interface UpdateMenuItemAction {
-    type: 'UPDATE_MENU_ITEM';
+    type: typeof UPDATE_MENU_ITEM;
     payload: MenuItem;
+}
+interface DeleteMenuItemAction {
+    type: typeof DELETE_MENU_ITEM;
+    id: number;
 }
 export interface SubmitOrderAction {
     type: typeof SUBMIT_ORDER;
@@ -63,7 +68,7 @@ export interface MarkOrderAsDeliveredAction {
 
 export type AppActionTypes = AddItemAction | SubmitOrderAction | MarkOrderAsDoneAction | RemoveItemAction |
     UpdateOrderAction | UpdateItemQuantityAction | DeleteOrderAction | MarkOrderAsDeliveredAction  | AddMenuItemAction |
-    UpdateMenuItemAction;
+    UpdateMenuItemAction | DeleteMenuItemAction;
 
 export const addItem = (item: MenuItem): AppActionTypes => ({
     type: ADD_ITEM,
@@ -80,6 +85,12 @@ export const updateMenuItem = (item: MenuItem): UpdateMenuItemAction => {
     return {
         type: UPDATE_MENU_ITEM,
         payload: item
+    }
+}
+export const deleteMenuItemAC = (id: number): DeleteMenuItemAction => {
+    return {
+        type: DELETE_MENU_ITEM,
+        id
     }
 }
 export const submitOrder = (): AppActionTypes => ({

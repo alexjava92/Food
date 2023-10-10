@@ -9,7 +9,7 @@ import {
     UPDATE_ITEM_QUANTITY,
     DELETE_ORDER,
     MARK_ORDER_AS_DELIVERED,
-    ADD_MENU_ITEM, UPDATE_MENU_ITEM,
+    ADD_MENU_ITEM, UPDATE_MENU_ITEM, DELETE_MENU_ITEM,
 } from './actions';
 import {MenuItem} from "../components/Menu";
 import {OrderItemSummary} from "../components/OrderSummary";
@@ -109,6 +109,15 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
                         return item;
                     })
                 }
+        case DELETE_MENU_ITEM: {
+            const deleteMenuItem = state.menuItems.find(item => item.id === action.id);
+            if (!deleteMenuItem) return state;
+            const newMenuItems = state.menuItems.filter(
+                item => item.id !== deleteMenuItem.id
+            );
+            state.menuItems = newMenuItems;
+            return {...state}
+        }
 
         case REMOVE_ITEM:
             const updatedOrderItems = state.orderItems.map(orderItem =>

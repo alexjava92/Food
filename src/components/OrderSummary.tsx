@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Grid, IconButton, Paper} from "@mui/material";
+import {Grid, IconButton, Paper} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SubmitOrderButton from "./SubmitOrderButton";
 import {submitOrder} from "../redux/actions";
 import {useDispatch} from "react-redux";
-import {MenuItem} from "./Menu";
+
 
 export type OrderItemSummary = {
     id: number;
