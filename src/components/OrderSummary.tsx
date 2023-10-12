@@ -1,7 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {Grid, IconButton, Paper} from "@mui/material";
+import {
+    Grid,
+    Paper,
+    Typography,
+    IconButton,
+    Button,
+    Box,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemSecondaryAction
+} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
-import SubmitOrderButton from "./SubmitOrderButton";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {submitOrder} from "../redux/actions";
 import {useDispatch} from "react-redux";
 
@@ -42,37 +53,45 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({orderItems, onItemRemove}) =
         <Grid container spacing={2}>
             {orderItems.length > 0 && (
                 <Grid item xs={12}>
-                    <h1 style={{ fontSize: '24px' }}>Корзина заказа: {priceList} руб.</h1>
-                </Grid>
-            )}
-            {orderItems.length > 0 &&
-                orderItems.map((item) => (
-                    <Grid item xs={6} key={item.id}>
-                        <Paper elevation={3} style={{
-                            padding: '10px',
-                            textAlign: 'center',
-                            cursor: 'pointer',
-                            transition: 'transform 0.2s', // Добавляем анимацию
-                        }}>
-                            <div className="order-item">
-                                {item.name} - {item.quantity} - {item.price}
-                                <IconButton
-                                    color="error"
-                                    aria-label="delete"
-                                    onClick={() => onItemRemove(item.id)}
-                                >
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
-                        </Paper>
-                    </Grid>
-                ))}
-            {orderItems.length > 0 && (
-                <Grid item xs={12}>
-                    <SubmitOrderButton onSubmit={handleSubmit} />
+                    <Box display="flex" alignItems="center">
+                        <ShoppingCartIcon color="primary" sx={{ fontSize: 28, mr: 1 }} />
+                        <Typography variant="h5">
+                            Корзина заказа: {priceList} руб.
+                        </Typography>
+                    </Box>
                 </Grid>
             )}
 
+            <Grid item xs={12}>
+                <List>
+                    {orderItems.map((item) => (
+                        <ListItem key={item.id}>
+                            <ListItemText
+                                primary={item.name}
+                                secondary={`${item.quantity} - ${item.price} руб.`}
+                            />
+                            <ListItemSecondaryAction>
+                                <IconButton color="error" onClick={() => onItemRemove(item.id)}>
+                                    <DeleteIcon />
+                                </IconButton>
+                            </ListItemSecondaryAction>
+                        </ListItem>
+                    ))}
+                </List>
+            </Grid>
+
+            {orderItems.length > 0 && (
+                <Grid item xs={12}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        fullWidth
+                        onClick={handleSubmit}
+                    >
+                        Оформить заказ
+                    </Button>
+                </Grid>
+            )}
         </Grid>
 
     );

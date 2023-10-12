@@ -3,17 +3,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {addMenuItem, deleteMenuItemAC, updateMenuItem} from '../redux/actions';
 import {AppState} from '../redux/reducers';
 import {Button, Input, Paper, TextField, Typography} from "@mui/material";
+import {MenuItem as MenuEditorType} from './Menu';
 
-interface MenuItem {
-    id: number;
-    name: string;
-    price: number;
-
-}
 
 export function MenuEditor() {
 
-    const menuItems = useSelector<AppState, MenuItem[]>(
+    const menuItems = useSelector<AppState, MenuEditorType[]>(
         (state) => state.menuItems
     );
 
@@ -52,7 +47,7 @@ export function MenuEditor() {
 
 }
 
-function MenuItem({item}: { item: MenuItem }) {
+function MenuItem({item}: { item: MenuEditorType }) {
 
     const [editing, setEditing] = useState(false);
 
@@ -71,22 +66,30 @@ function MenuItem({item}: { item: MenuItem }) {
     }
 
     return (
-        <Paper component="div" sx={{p: 2, m: 2,}}>
+        <Paper component="div" sx={{p: 2, m: 2}}>
             <Typography>
-                {item.id} - {item.name} - {item.price}
+                <strong>ID:</strong> {item.id}<br />
+                <strong>Название:</strong> {item.name}<br />
+                <strong>Цена:</strong> {item.price}<br />
+                <strong>Описание:</strong> {item.description}<br />
+                <strong>Количество:</strong> {item.amount}
             </Typography>
-            <Button onClick={() => setEditing(true)}
-                    variant="outlined"
-                    size="small"
-                    sx={{m: 1,}}
-            >Изменить
+            <Button
+                onClick={() => setEditing(true)}
+                variant="outlined"
+                size="small"
+                sx={{m: 1}}
+            >
+                Изменить
             </Button>
-            <Button onClick={handleDeleteMenuItem}
-                    variant="outlined"
-                    color={"warning"}
-                    size="small"
-                    sx={{m: 1,}}
-            >Удалить
+            <Button
+                onClick={handleDeleteMenuItem}
+                variant="outlined"
+                color="warning"
+                size="small"
+                sx={{m: 1}}
+            >
+                Удалить
             </Button>
         </Paper>
 
@@ -95,21 +98,21 @@ function MenuItem({item}: { item: MenuItem }) {
 }
 
 function EditForm({item, onCancel}: {
-    item: MenuItem,
+    item: MenuEditorType,
     onCancel: () => void
 }) {
 
     const [name, setName] = useState(item.name);
     const [price, setPrice] = useState(item.price);
-    const [description, setDescription] = useState('');
-    const [amount, setAmount] = useState('');
+    const [description, setDescription] = useState(item.description);
+    const [amount, setAmount] = useState(item.amount);
 
     const dispatch = useDispatch();
 
     const handleUpdate = useCallback(() => {
-        dispatch(updateMenuItem({...item, name, price}));
+        dispatch(updateMenuItem({...item, name, price, description, amount}));
         onCancel();
-    }, [name, price]);
+    }, [name, price, description, amount]);
 
 
     return (
@@ -126,6 +129,35 @@ function EditForm({item, onCancel}: {
                 type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
+            />
+
+            <TextField
+                id="standard-multiline-flexible"
+                multiline
+                maxRows={4}
+                size="small"
+                variant="standard"
+                label="Ингредиенты"
+                sx={{
+                    p: 2,
+                    m: 2,
+                    width: '30%'
+                }}
+                type="text"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+            />
+            <TextField size="small"
+                       variant="standard"
+                       label="Количество: гр. или шт."
+                       sx={{
+                           p: 2,
+                           m: 2,
+                           width: '30%'
+                       }}
+                       type="text"
+                       value={amount}
+                       onChange={e => setAmount(e.target.value)}
             />
 
             <TextField
@@ -196,17 +228,21 @@ function AddForm({onCancel}: { onCancel: () => void }) {
                        value={name}
                        onChange={e => setName(e.target.value)}
             />
-            <TextField size="small"
-                       variant="standard"
-                       label="Ингредиенты"
-                       sx={{
-                           p: 2,
-                           m: 2,
-                           width: '30%'
-                       }}
-                       type="text"
-                       value={description}
-                       onChange={e => setDescription(e.target.value)}
+            <TextField
+                id="standard-multiline-flexible"
+                multiline
+                maxRows={4}
+                size="small"
+                variant="standard"
+                label="Ингредиенты"
+                sx={{
+                    p: 2,
+                    m: 2,
+                    width: '30%'
+                }}
+                type="text"
+                value={description}
+                onChange={e => setDescription(e.target.value)}
             />
             <TextField size="small"
                        variant="standard"

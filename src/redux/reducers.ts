@@ -237,6 +237,7 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
 
         }
         case UPDATE_MENU_ITEM:
+            console.log('Updating menu item with payload:', action.payload);
             return {
                 ...state,
                 menuItems: state.menuItems.map(item => {

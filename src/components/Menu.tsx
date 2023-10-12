@@ -1,6 +1,6 @@
 import React from 'react';
-import {Grid, IconButton, Paper, styled, Typography} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import {Divider, Grid, List, ListItem, Paper, styled, Typography} from '@mui/material';
+
 
 export type MenuItem = {
     id: number;
@@ -18,16 +18,21 @@ export type MenuProps = {
 
 const Menu: React.FC<MenuProps> = ({items, onItemSelect}) => (
     <Grid container spacing={2}>
-        {items.map(item => (
-            <Grid item xs={6} key={item.id}>
-                <CustomPaper elevation={4} onClick={() => onItemSelect(item)}>
-                    <Typography sx={{p: 1}} variant="h6">{item.name}</Typography>
-                    <Typography variant="body2" color="textSecondary">{item.description}</Typography>
-                    <Typography sx={{p: 1}} variant="body2" color="textSecondary">Кол: {item.amount}</Typography>
-                    <Typography sx={{p: 1}} variant="h6" color="primary">{item.price} руб.</Typography>
-                </CustomPaper>
-            </Grid>
-        ))}
+        <Grid item xs={12}>
+            <List component="nav" aria-label="menu items">
+                {items.map((item, index) => (
+                    <div key={item.id}>
+                        <ListItem button onClick={() => onItemSelect(item)} sx={{ padding: '16px 32px' }}>
+                            <Typography variant="h6">{item.name}</Typography>
+                            <Typography variant="body2" color="textSecondary" sx={{ ml: 2 }}>{item.description}</Typography>
+                            <Typography variant="body2" color="textSecondary" sx={{ ml: 'auto' }}>Кол: {item.amount}</Typography>
+                            <Typography variant="h6" color="primary" sx={{ ml: 2 }}>{item.price} руб.</Typography>
+                        </ListItem>
+                        {index !== items.length - 1 && <Divider />}  {/* Добавляем разделитель между элементами списка, кроме последнего */}
+                    </div>
+                ))}
+            </List>
+        </Grid>
     </Grid>
 );
 
