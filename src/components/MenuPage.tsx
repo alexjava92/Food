@@ -8,6 +8,8 @@ import KitchenPage from "./KitchenPage";
 import {Grid, styled} from "@mui/material";
 import DeliveredOrders from "./DeliveredOrders";
 import {AppState} from "../redux/reducers";
+import {SearchInput} from "./SearchInput";
+import {MenuContainer} from "./MenuContainer";
 
 
 
@@ -17,9 +19,7 @@ const MenuPage: React.FC = () => {
     const menuItems = useSelector((state: AppState) => state.menuItems);  // Укажите правильный тип для `state`
     const orderItems = useSelector((state: AppState) => state.orderItems);  // Укажите правильный тип для `state`
 
-    const handleItemSelect = (item: any) => {  // Укажите правильный тип для `item`
-        dispatch(addItem(item));
-    };
+
 
 
     const handleItemRemove = (itemId: number) => {
@@ -30,8 +30,8 @@ const MenuPage: React.FC = () => {
 
         <StyledGrid container spacing={3} >
             <Grid item sm={3} >
+                <MenuContainer items={menuItems}/>
 
-                <Menu items={menuItems} onItemSelect={handleItemSelect}/>
             </Grid>
 
             <Grid item sm={3}>

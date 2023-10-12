@@ -101,6 +101,8 @@ function EditForm({item, onCancel}: {
 
     const [name, setName] = useState(item.name);
     const [price, setPrice] = useState(item.price);
+    const [description, setDescription] = useState('');
+    const [amount, setAmount] = useState('');
 
     const dispatch = useDispatch();
 
@@ -170,15 +172,15 @@ function AddForm({onCancel}: { onCancel: () => void }) {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
+    const [description, setDescription] = useState('');
+    const [amount, setAmount] = useState('');
 
     const dispatch = useDispatch();
 
     const handleAddSubmit = useCallback(() => {
-        dispatch(addMenuItem(name, price));
-        setName('');
-        setPrice(0);
+        dispatch(addMenuItem(name, price, description, amount));
         onCancel()
-    }, [name, price]);
+    }, [name, price, description, amount]);
 
     return (
         <div>
@@ -193,6 +195,30 @@ function AddForm({onCancel}: { onCancel: () => void }) {
                        type="text"
                        value={name}
                        onChange={e => setName(e.target.value)}
+            />
+            <TextField size="small"
+                       variant="standard"
+                       label="Ингредиенты"
+                       sx={{
+                           p: 2,
+                           m: 2,
+                           width: '30%'
+                       }}
+                       type="text"
+                       value={description}
+                       onChange={e => setDescription(e.target.value)}
+            />
+            <TextField size="small"
+                       variant="standard"
+                       label="Количество: гр. или шт."
+                       sx={{
+                           p: 2,
+                           m: 2,
+                           width: '30%'
+                       }}
+                       type="text"
+                       value={amount}
+                       onChange={e => setAmount(e.target.value)}
             />
 
             <TextField

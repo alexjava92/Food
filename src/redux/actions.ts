@@ -20,65 +20,79 @@ export interface AddItemAction {
     type: typeof ADD_ITEM;
     item: MenuItem;
 }
+
 export interface AddMenuItemAction {
     type: typeof ADD_MENU_ITEM;
     payload: {
         name: string;
         price: number;
+        description: string,
+        amount: string
     }
 }
+
 interface UpdateMenuItemAction {
     type: typeof UPDATE_MENU_ITEM;
     payload: MenuItem;
 }
+
 interface DeleteMenuItemAction {
     type: typeof DELETE_MENU_ITEM;
     id: number;
 }
+
 export interface SubmitOrderAction {
     type: typeof SUBMIT_ORDER;
 }
+
 export interface MarkOrderAsDoneAction {
     type: typeof MARK_ORDER_AS_DONE;
     orderId: number;
 }
+
 export interface RemoveItemAction {
     type: typeof REMOVE_ITEM;
     itemId: number;
 }
+
 export interface UpdateOrderAction {
     type: typeof UPDATE_ORDER;
     orderId: number;
     updatedItems: OrderItemList[];
 }
+
 interface UpdateItemQuantityAction {
     type: typeof UPDATE_ITEM_QUANTITY;
     orderId: number;
     itemName: string;
     quantity: number;
 }
+
 export interface DeleteOrderAction {
     type: typeof DELETE_ORDER;
     orderId: number;
 }
+
 export interface MarkOrderAsDeliveredAction {
     type: typeof MARK_ORDER_AS_DELIVERED;
     orderId: number;
 }
 
 export type AppActionTypes = AddItemAction | SubmitOrderAction | MarkOrderAsDoneAction | RemoveItemAction |
-    UpdateOrderAction | UpdateItemQuantityAction | DeleteOrderAction | MarkOrderAsDeliveredAction  | AddMenuItemAction |
+    UpdateOrderAction | UpdateItemQuantityAction | DeleteOrderAction | MarkOrderAsDeliveredAction | AddMenuItemAction |
     UpdateMenuItemAction | DeleteMenuItemAction;
 
 export const addItem = (item: MenuItem): AppActionTypes => ({
     type: ADD_ITEM,
     item
 });
-export const addMenuItem = (name: string, price: number): AppActionTypes => ({
+export const addMenuItem = (name: string, price: number, description: string, amount: string): AppActionTypes => ({
     type: ADD_MENU_ITEM,
     payload: {
         name,
-        price
+        price,
+        description,
+        amount
     }
 })
 export const updateMenuItem = (item: MenuItem): UpdateMenuItemAction => {

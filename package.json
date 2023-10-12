@@ -33,7 +33,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "node_modules/.bin/gh-pages -d build"
-
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
