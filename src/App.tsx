@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, Link, Navigate} from 'react-router-dom';
 import MenuPage from "./components/MenuPage";
 import KitchenPage from "./components/KitchenPage";
 import {AppBar, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
@@ -23,6 +23,12 @@ const App: React.FC = () => {
 
                 {/* Routes - содержимое страницы */}
                 <Routes>
+
+                    <Route
+                        path="/"
+                        element={<Navigate to={"/menu"} replace />}
+                    />
+
                     <Route path="/menu" element={<MenuPage/>}/>
                     <Route path="/kitchen" element={<KitchenPage/>}/>
                     <Route path="/menu-editor" element={<MenuEditor/>}/>

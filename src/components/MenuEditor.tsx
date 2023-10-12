@@ -116,7 +116,7 @@ function EditForm({item, onCancel}: {
 
 
     return (
-        <div style={{display: 'flex', alignItems: 'center'}}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <TextField
                 size="small"
                 variant="standard"
@@ -124,7 +124,7 @@ function EditForm({item, onCancel}: {
                 sx={{
                     p: 2,
                     m: 2,
-                    width: '30%'
+                    width: { xs: '90%', md: '30%' }
                 }}
                 type="text"
                 value={name}
@@ -141,23 +141,25 @@ function EditForm({item, onCancel}: {
                 sx={{
                     p: 2,
                     m: 2,
-                    width: '30%'
+                    width: { xs: '90%', md: '30%' }
                 }}
                 type="text"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
             />
-            <TextField size="small"
-                       variant="standard"
-                       label="Количество: гр. или шт."
-                       sx={{
-                           p: 2,
-                           m: 2,
-                           width: '30%'
-                       }}
-                       type="text"
-                       value={amount}
-                       onChange={e => setAmount(e.target.value)}
+
+            <TextField
+                size="small"
+                variant="standard"
+                label="Количество: гр. или шт."
+                sx={{
+                    p: 2,
+                    m: 2,
+                    width: { xs: '90%', md: '30%' }
+                }}
+                type="text"
+                value={amount}
+                onChange={e => setAmount(e.target.value)}
             />
 
             <TextField
@@ -167,32 +169,34 @@ function EditForm({item, onCancel}: {
                 sx={{
                     p: 2,
                     m: 2,
-                    width: '30%'
+                    width: { xs: '90%', md: '30%' }
                 }}
                 type="number"
                 value={price}
                 onChange={e => setPrice(Number(e.target.value))}
             />
 
-            <Button onClick={handleUpdate}
-                    variant="outlined"
-                    size="small"
-                    sx={{
-                        p: 2,
-                        m: 2,
-                        width: '15%'
-                    }}>
+            <Button
+                onClick={handleUpdate}
+                variant="outlined"
+                size="small"
+                sx={{
+                    p: 2,
+                    m: 2,
+                    width: { xs: '90%', md: '15%' }
+                }}>
                 Обновить
             </Button>
 
-            <Button onClick={onCancel}
-                    variant="outlined"
-                    size="small"
-                    sx={{
-                        p: 2,
-                        m: 2,
-                        width: '15%'
-                    }}>
+            <Button
+                onClick={onCancel}
+                variant="outlined"
+                size="small"
+                sx={{
+                    p: 2,
+                    m: 2,
+                    width: { xs: '90%', md: '15%' }
+                }}>
                 Отмена
             </Button>
         </div>
