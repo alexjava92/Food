@@ -15,6 +15,9 @@ import {MenuItem} from "../components/Menu";
 import {OrderItemSummary} from "../components/OrderSummary";
 import {OrderItemList} from "../components/OrdersList";
 import {DeliveredOrderList} from "../components/DeliveredOrders";
+import {log} from "util";
+import {addNewOrder} from "../api/api";
+
 
 
 export interface AppState {
@@ -280,10 +283,21 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
                 id: state.orders.length + state.deliveredOrders.length + 1,  // присваиваем новому заказу следующий ID
                 items: state.orderItems.map(item => ({
                     ...item,
-                    id: new Date().getTime() + Math.random()// создаем уникальный ID для каждого товара
+                    id: new Date().getTime()// создаем уникальный ID для каждого товара
                 })),
                 orderPrice: orderPrice
+
             };
+            const orderToSubmit = {
+                orderId: newOrder.id,
+                items: newOrder.items,
+                totalQuantity: newOrder.items.reduce((total, item) => total + item.quantity, 0),
+                totalPrice: newOrder.orderPrice
+            };
+            console.log(orderToSubmit)
+            addNewOrder(orderToSubmit)
+
+
 
             return <AppState>{
                 ...state,  // сохраняем текущее состояние

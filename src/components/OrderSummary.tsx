@@ -15,6 +15,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {submitOrder} from "../redux/actions";
 import {useDispatch} from "react-redux";
+import {addNewOrder} from "../api/api";
+
 
 
 export type OrderItemSummary = {
@@ -36,6 +38,9 @@ type OrderSummaryProps = {
 
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({orderItems, onItemRemove}) => {
+
+
+
     const dispatch = useDispatch();
     const handleSubmit = () => {
         dispatch(submitOrder());

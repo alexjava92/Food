@@ -2,8 +2,10 @@ import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import React from "react";
+import useSound from "use-sound";
 
 export const Header = () => {
+
     return (
         <AppBar position="static">
             <Toolbar variant="dense">

@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import OrdersList from "./OrdersList";
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteOrder, markOrderAsDelivered, markOrderAsDone, updateItemQuantity} from '../redux/actions';
+import {deleteOrder, markOrderAsDelivered, markOrderAsDone} from '../redux/actions';
+
 
 import {AppState} from "../redux/reducers";
+import useSound from "use-sound";
 
 
 const KitchenPage: React.FC = () => {
@@ -14,7 +16,7 @@ const KitchenPage: React.FC = () => {
     const handleMarkAsDone = (orderId: number) => {
         dispatch(markOrderAsDone(orderId));
     };
-    
+
 
     const handleDeleteOrder = (orderId: number) => {
         dispatch(deleteOrder(orderId));

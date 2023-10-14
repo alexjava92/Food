@@ -6,8 +6,6 @@ import {AppBar, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@
 import {Menu} from "@mui/icons-material";
 import {Header} from "./components/Header";
 import {MenuEditor} from "./components/MenuEditor";
-import {useSelector} from "react-redux";
-import {AppState} from "./redux/reducers";
 
 
 
@@ -20,6 +18,7 @@ const App: React.FC = () => {
             <Router>
                 {/* Header - верхняя панель */}
                 <Header/>
+
 
                 {/* Routes - содержимое страницы */}
                 <Routes>
