@@ -5,7 +5,7 @@ import {deleteOrder, markOrderAsDelivered, markOrderAsDone} from '../redux/actio
 
 
 import {AppState} from "../redux/reducers";
-import useSound from "use-sound";
+
 
 
 const KitchenPage: React.FC = () => {

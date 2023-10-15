@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
     Grid,
-    Paper,
     Typography,
     IconButton,
     Button,
@@ -15,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {submitOrder} from "../redux/actions";
 import {useDispatch} from "react-redux";
-import {addNewOrder} from "../api/api";
+
 
 
 
