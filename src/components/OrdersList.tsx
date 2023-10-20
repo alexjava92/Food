@@ -16,6 +16,7 @@ export type OrderList = {
     items: OrderItemList[];
     isDone?: boolean;
     orderPrice: number
+    totalQuantity: number
 };
 
 type OrdersListProps = {

@@ -15,6 +15,7 @@ export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const UPDATE_ITEM_QUANTITY = "UPDATE_ITEM_QUANTITY";
 export const DELETE_ORDER = 'DELETE_ORDER';
 export const MARK_ORDER_AS_DELIVERED = 'MARK_ORDER_AS_DELIVERED';
+export const SET_ORDERS = 'SET_ORDERS';
 
 export interface AddItemAction {
     type: typeof ADD_ITEM;
@@ -77,10 +78,15 @@ export interface MarkOrderAsDeliveredAction {
     type: typeof MARK_ORDER_AS_DELIVERED;
     orderId: number;
 }
+export interface SetOrdersAction {
+    type: typeof SET_ORDERS;
+    orders: any[]; // замените `any` на тип вашего заказа, если он у вас есть
+}
 
 export type AppActionTypes = AddItemAction | SubmitOrderAction | MarkOrderAsDoneAction | RemoveItemAction |
     UpdateOrderAction | UpdateItemQuantityAction | DeleteOrderAction | MarkOrderAsDeliveredAction | AddMenuItemAction |
-    UpdateMenuItemAction | DeleteMenuItemAction;
+    UpdateMenuItemAction | DeleteMenuItemAction | SetOrdersAction;
+
 
 export const addItem = (item: MenuItem): AppActionTypes => ({
     type: ADD_ITEM,
@@ -140,4 +146,9 @@ export const deleteOrder = (orderId: number): AppActionTypes => ({
 export const markOrderAsDelivered = (orderId: number): AppActionTypes => ({
     type: MARK_ORDER_AS_DELIVERED,
     orderId
+});
+
+export const setOrders = (orders: any[]): AppActionTypes => ({
+    type: SET_ORDERS,
+    orders
 });

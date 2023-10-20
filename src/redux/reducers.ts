@@ -9,14 +9,14 @@ import {
     UPDATE_ITEM_QUANTITY,
     DELETE_ORDER,
     MARK_ORDER_AS_DELIVERED,
-    ADD_MENU_ITEM, UPDATE_MENU_ITEM, DELETE_MENU_ITEM,
+    ADD_MENU_ITEM, UPDATE_MENU_ITEM, DELETE_MENU_ITEM, SET_ORDERS,
 } from './actions';
 import {MenuItem} from "../components/Menu";
 import {OrderItemSummary} from "../components/OrderSummary";
 import {OrderItemList} from "../components/OrdersList";
 import {DeliveredOrderList} from "../components/DeliveredOrders";
-import {log} from "util";
-import {addNewOrder} from "../api/api";
+
+import {addNewOrder, getOrder} from "../api/api";
 
 
 
@@ -259,7 +259,6 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
             state.menuItems = newMenuItems;
             return {...state}
         }
-
         case REMOVE_ITEM:
             const updatedOrderItems = state.orderItems.map(orderItem =>
                 orderItem.id === action.itemId
@@ -269,6 +268,7 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
             return {...state, orderItems: updatedOrderItems};
         case SUBMIT_ORDER:
             // Проверка на наличие элементов в заказе перед отправкой
+            console.log("STATE: ",state)
             if (state.orderItems.length === 0) {
                 console.error('No items to submit');
                 return state;  // возвращаем текущее состояние, если нет элементов для заказа
@@ -294,15 +294,13 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
                 totalQuantity: newOrder.items.reduce((total, item) => total + item.quantity, 0),
                 totalPrice: newOrder.orderPrice
             };
-            console.log(orderToSubmit)
-            addNewOrder(orderToSubmit)
-
-
-
+            console.log("SUBMIT_ORDER", orderToSubmit)
+            console.log("STATE: ",state)
             return <AppState>{
                 ...state,  // сохраняем текущее состояние
                 orders: [...state.orders, newOrder],  // добавляем новый заказ в список заказов
                 orderItems: []  // очищаем текущий заказ
+
             };
         case MARK_ORDER_AS_DONE:
             // Находим заказ с указанным orderId и отмечаем его как выполненный
@@ -379,6 +377,11 @@ export const appReducer = (state = initialState, action: AppActionTypes): AppSta
                 ...state,
                 orders: state.orders.filter(order => order.id !== action.orderId),
                 deliveredOrders: [...state.deliveredOrders, deliveredOrder].reverse()
+            };
+        case SET_ORDERS:
+            return {
+                ...state,
+                orders: action.orders
             };
 
         default:
